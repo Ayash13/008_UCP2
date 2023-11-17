@@ -49,9 +49,8 @@ fun MainApp(
                 FirstPage(
                     goToNextPage = {
                         viewModel.setContent(it)
-
+                        navController.navigate(PageManager.Second.name)
                     },
-                    onNextButtonClicked = { navController.navigate(PageManager.Second.name) },
                     onSelectionChanged1 = { viewModel.setDosbing1(it) },
                     onSelectionChanged2 = { viewModel.setDosbing2(it) },
                     pilihDosbing1 = Dosbing1.map { id -> context.resources.getString(id) },
@@ -72,3 +71,8 @@ fun MainApp(
     }
 }
 
+private fun backButton(
+    navController: NavHostController,
+) {
+    navController.popBackStack(PageManager.First.name, inclusive = false)
+}

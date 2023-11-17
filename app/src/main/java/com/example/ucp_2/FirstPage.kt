@@ -47,7 +47,7 @@ import com.example.ucp_2.data.DataSource.Dosbing2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: () -> Unit,pilihDosbing1: List<String>,onSelectionChanged1: (String) -> Unit, onSelectionChanged2: (String) -> Unit,pilihDosbing2: List<String>) {
+fun FirstPage(goToNextPage: (MutableList<String>) -> Unit,pilihDosbing1: List<String>,onSelectionChanged1: (String) -> Unit, onSelectionChanged2: (String) -> Unit,pilihDosbing2: List<String>) {
 
     var txtnama by remember { mutableStateOf("") }
     var txtnim by remember { mutableStateOf("") }
@@ -77,7 +77,7 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
             label = {
-                Text(text = "Username")
+                Text(text = "Nama")
             },
             onValueChange = {
                 txtnama = it
@@ -90,7 +90,7 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
             label = {
-                Text(text = "Telephone")
+                Text(text = "NIM")
             },
             onValueChange = { txtnim = it }
         )
@@ -100,7 +100,7 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
             label = {
-                Text(text = "Email")
+                Text(text = "Konsentrasi")
             },
             onValueChange = { txtkonsen = it }
         )
@@ -110,7 +110,7 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
             label = {
-                Text(text = "Email")
+                Text(text = "Judul Skripsi")
             },
             onValueChange = { txtjudul = it }
         )
@@ -121,14 +121,14 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
         }
         Row() {
             pilihDosbing1.forEach { item ->
-                Row(modifier = Modifier.selectable(
+                Column(modifier = Modifier.selectable(
                     selected = selectedDosbing1 == item,
                     onClick = {
                         selectedDosbing1 = item
                         onSelectionChanged1(item)
                     }
                 ),
-                    verticalAlignment = Alignment.CenterVertically
+
                 ) {
                     RadioButton(selected = selectedDosbing1 == item,
                         onClick = {
@@ -139,14 +139,14 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
                 }
             }
             pilihDosbing1.forEach { item ->
-                Row(modifier = Modifier.selectable(
+                Column(modifier = Modifier.selectable(
                     selected = selectedDosbing2 == item,
                     onClick = {
                         selectedDosbing2 = item
                         onSelectionChanged2(item)
                     }
                 ),
-                    verticalAlignment = Alignment.CenterVertically
+
                 ) {
                     RadioButton(selected = selectedDosbing2 == item,
                         onClick = {
@@ -162,77 +162,10 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit, onNextButtonClicked: 
             modifier = Modifier
                 .fillMaxWidth()
                 .height(40.dp),
-            onClick = onNextButtonClicked,
+            onClick = { goToNextPage(listData) },
         ) {
             Text(text = stringResource(R.string.submit), fontSize = 16.sp)
         }
     }
 }
 
-@Composable
-fun SelectDosbing1(
-    options: List<String>,
-    onSelectionChanged: (String) -> Unit = {},
-) {
-    var selectedValue by rememberSaveable { mutableStateOf("") }
-    Column(
-        modifier = Modifier
-            .padding(10.dp)
-    ) {
-        options.forEach { item ->
-            Row(
-                modifier = Modifier
-                    .selectable(
-                        selected = selectedValue == item,
-                        onClick = {
-                            selectedValue = item
-                            onSelectionChanged(item)
-                        }
-                    ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(selected = selectedValue == item,
-                    onClick = {
-                        selectedValue = item
-                        onSelectionChanged(item)
-                    }
-                )
-                Text(item)
-            }
-        }
-    }
-}
-
-@Composable
-fun SelectDosbing2(
-    options: List<String>,
-    onSelectionChanged: (String) -> Unit = {},
-) {
-    var selectedValue by rememberSaveable { mutableStateOf("") }
-    Column(
-        modifier = Modifier
-            .padding(10.dp)
-    ) {
-        options.forEach { item ->
-            Row(
-                modifier = Modifier
-                    .selectable(
-                        selected = selectedValue == item,
-                        onClick = {
-                            selectedValue = item
-                            onSelectionChanged(item)
-                        }
-                    ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(selected = selectedValue == item,
-                    onClick = {
-                        selectedValue = item
-                        onSelectionChanged(item)
-                    }
-                )
-                Text(item)
-            }
-        }
-    }
-}

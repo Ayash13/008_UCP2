@@ -46,7 +46,6 @@ class ViewController : ViewModel() {
             nim = listData[1],
             konsentrasi = listData[2],
             judul = listData[3]
-
         )
     }
 }

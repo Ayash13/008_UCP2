@@ -46,7 +46,7 @@ fun WelcomePage(   onNextButtonClicked: () -> Unit,) {
     ) {
         Image(painter = painterResource(id = R.drawable.image1), contentDescription = "Image1")
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onNextButtonClicked,
             modifier = Modifier.padding(10.dp)
         ) {
             Text(text = "Next")
