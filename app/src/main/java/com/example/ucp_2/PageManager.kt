@@ -47,14 +47,15 @@ fun MainApp(
             composable(PageManager.First.name) {
                 val context = LocalContext.current
                 FirstPage(
-                    goToNextPage = {
-                        viewModel.setContent(it)
-                        navController.navigate(PageManager.Second.name)
-                    },
                     onSelectionChanged1 = { viewModel.setDosbing1(it) },
                     onSelectionChanged2 = { viewModel.setDosbing2(it) },
                     pilihDosbing1 = Dosbing1.map { id -> context.resources.getString(id) },
                     pilihDosbing2 = Dosbing2.map { id -> context.resources.getString(id) },
+                    goToNextPage = {
+                        viewModel.setContent(it)
+                        navController.navigate(PageManager.Second.name)
+                    },
+
                 )
             }
             composable(route = PageManager.Second.name) {
@@ -63,7 +64,7 @@ fun MainApp(
                     backButton = {
                         navController.navigate(PageManager.First.name)
                     },
-                    )
+                )
             }
         }
 

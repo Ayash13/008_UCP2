@@ -47,7 +47,13 @@ import com.example.ucp_2.data.DataSource.Dosbing2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FirstPage(goToNextPage: (MutableList<String>) -> Unit,pilihDosbing1: List<String>,onSelectionChanged1: (String) -> Unit, onSelectionChanged2: (String) -> Unit,pilihDosbing2: List<String>) {
+fun FirstPage(
+    goToNextPage: (MutableList<String>) -> Unit,
+    pilihDosbing1: List<String>,
+    onSelectionChanged1: (String) -> Unit,
+    onSelectionChanged2: (String) -> Unit,
+    pilihDosbing2: List<String>,
+) {
 
     var txtnama by remember { mutableStateOf("") }
     var txtnim by remember { mutableStateOf("") }
@@ -121,15 +127,16 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit,pilihDosbing1: List<St
         }
         Row() {
             pilihDosbing1.forEach { item ->
-                Column(modifier = Modifier.selectable(
-                    selected = selectedDosbing1 == item,
-                    onClick = {
-                        selectedDosbing1 = item
-                        onSelectionChanged1(item)
-                    }
-                ),
+                Column(
+                    modifier = Modifier.selectable(
+                        selected = selectedDosbing1 == item,
+                        onClick = {
+                            selectedDosbing1 = item
+                            onSelectionChanged1(item)
+                        }
+                    ),
 
-                ) {
+                    ) {
                     RadioButton(selected = selectedDosbing1 == item,
                         onClick = {
                             selectedDosbing1 = item
@@ -138,16 +145,17 @@ fun FirstPage(goToNextPage: (MutableList<String>) -> Unit,pilihDosbing1: List<St
                     )
                 }
             }
-            pilihDosbing1.forEach { item ->
-                Column(modifier = Modifier.selectable(
-                    selected = selectedDosbing2 == item,
-                    onClick = {
-                        selectedDosbing2 = item
-                        onSelectionChanged2(item)
-                    }
-                ),
+            pilihDosbing2.forEach { item ->
+                Column(
+                    modifier = Modifier.selectable(
+                        selected = selectedDosbing2 == item,
+                        onClick = {
+                            selectedDosbing2 = item
+                            onSelectionChanged2(item)
+                        }
+                    ),
 
-                ) {
+                    ) {
                     RadioButton(selected = selectedDosbing2 == item,
                         onClick = {
                             selectedDosbing2 = item
